@@ -1,0 +1,10 @@
+<h2 class="text-center">文章内容</h2>
+
+<div class="col-md-r col-md-offset-4">
+
+  <p class="pull-right"><%= @post.user.email %>    <%= @post.created_at %></p>
+  <br />
+  <hr>
+  <b4 />
+  <p><%= simple_format(@post.content) %></p>
+</div>
