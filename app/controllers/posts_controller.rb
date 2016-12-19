@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create]
-  before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
+  before_action :find_post_and_check_permission, only: [:show, :edit, :update, :destroy]
 
   def new
-    #@group = Group.find(params[:group_id])
+    @group = Group.find(params[:group_id])
     @post = Post.new
   end
 
@@ -21,22 +21,23 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    #@post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     @post.destroy
     redirect_to account_posts_path
   end
 
   def edit
-    #@post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
+
     #redirect_to post_path
   end
 
   def show
-    #@post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
   end
 
   def update
-    #@post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to account_posts_path, notice: "Update Success"
     else
@@ -52,7 +53,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content)
   end
 
-  def find_group_and_check_permission
+  def find_post_and_check_permission
     @post = Post.find(params[:id])
 
     if current_user != @post.user
